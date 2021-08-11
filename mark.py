@@ -49,16 +49,19 @@ def markAttendance():
             numberOfElems = len(activityList)
             print(numberOfElems)
             while(numberOfElems > 0):
-                time.sleep(3)
+                time.sleep(1)
                 activityList = driver.find_elements_by_link_text(
                     'Go to activity')
                 try:
                     if activityList[numberOfElems - 1].is_enabled:
                         activityList[numberOfElems - 1].click()
+                    else:
+                        numberOfElems -= 1
+                        continue
                 except:
                     numberOfElems -= 1
                     continue
-                time.sleep(3)
+                time.sleep(1)
                 submitLink = driver.find_elements_by_link_text(
                     'Submit attendance')
                 if(len(submitLink) > 0):
@@ -92,7 +95,7 @@ def markAttendance():
                 msg['Subject'] = 'Moodle Attendance'
                 msg['From'] = "Priyanshu Raturi"
                 msg['To'] = users[userCount - 1]['email']
-                mailList = mailList.append(msg)
+                mailList.append(msg)
                 print(msg)
             driver.find_element_by_link_text('Log out').click()
             userCount -= 1
@@ -111,3 +114,6 @@ def markAttendance():
         print(e)
         userCount -= 1
         sendErrRep(e)
+
+
+markAttendance()
