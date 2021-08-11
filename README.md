@@ -9,7 +9,10 @@ Clone The Repository , install the requirements , enter your credentials in user
 ```bash
 pip install requirements.txt
 ```
-
+## Run
+```bash
+python main.py
+```
 ## User.json File
 
 ```json
