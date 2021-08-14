@@ -16,7 +16,7 @@ def markAttendance():
         users = json.load(file)
         userCount = len(users)
         chrome_options = webdriver.ChromeOptions()
-        # chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--headless")
         chrome_options.add_argument(("--no-sandbox"))
         chrome_options.add_argument('--disable-gpu')
         chrome_options.add_argument('window-size=1920x1080')
@@ -25,7 +25,7 @@ def markAttendance():
             './chromedriver', chrome_options=chrome_options)
         driver.get('http://45.116.207.67/moodle')
         while(userCount != 0):
-            driver.find_element_by_link_text('Log in').click()
+            driver.find_element_by_xpath('/html/body/div[2]/nav/ul[2]/li[3]/div/span/a').click()
             print(users[userCount - 1]['name'])
             driver.find_element_by_id('username').send_keys(
                 users[userCount - 1]['id'])
@@ -116,4 +116,4 @@ def markAttendance():
         sendErrRep(e)
 
 
-markAttendance()
+#markAttendance()
