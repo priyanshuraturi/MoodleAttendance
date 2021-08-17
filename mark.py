@@ -32,6 +32,7 @@ def markAttendance():
                 users[userCount - 1]['pass'])
             driver.find_element_by_id('loginbtn').click()
             time.sleep(1)
+            subjectList = []
             continueLink = driver.find_elements_by_link_text("Today")
             if not continueLink:
                 print("No Attendace For Today:")
