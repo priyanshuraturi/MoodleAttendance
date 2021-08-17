@@ -23,9 +23,8 @@ def markAttendance():
         chrome_options.add_argument("--disable-dev-shm-usage")
         driver = webdriver.Chrome(
             './chromedriver', chrome_options=chrome_options)
-        driver.get('http://45.116.207.67/moodle')
+        driver.get('http://45.116.207.67/moodle/login/index.php')
         while(userCount != 0):
-            driver.find_element_by_link_text('Log in').click()
             print(users[userCount - 1]['name'])
             driver.find_element_by_id('username').send_keys(
                 users[userCount - 1]['id'])
@@ -97,7 +96,8 @@ def markAttendance():
                 msg['To'] = users[userCount - 1]['email']
                 mailList.append(msg)
                 print(msg)
-            driver.find_element_by_link_text('Log out').click()
+            driver.delete_all_cookies()
+            driver.get('http://45.116.207.67/moodle/login/index.php')
             userCount -= 1
         if(flag == 1):
             msg = EmailMessage()
