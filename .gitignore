@@ -3,3 +3,4 @@ users.json
 /venv
 /.idea
 /__pycache__
+/env
