@@ -81,3 +81,7 @@ def sendTemp(userName, email, subList):
     except:
         print("Error in Sending Mail")
 
+# maillist = []
+# subList = ["Mobile Application Development","Cryptography","Web Development","Software Engneering"]
+#maillist.append(user.user("Priyanshu Raturi","priyanshuraturi@gmail.com",subList))
+# sendEmailTemp(maillist)
