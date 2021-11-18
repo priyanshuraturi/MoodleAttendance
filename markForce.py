@@ -39,7 +39,7 @@ def markAttendance():
                 msg = EmailMessage()
                 msg.set_content("No Attendance For Today")
                 msg['Subject'] = 'Moodle Attendance'
-                msg['From'] = "Attendance "
+                msg['From'] = "Priyanshu Raturi"
                 msg['To'] = "Priyanshuraturi@gmail.com"
                 mailList.append(msg)
                 break
