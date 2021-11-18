@@ -4,6 +4,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 from pathlib import Path
 import os
+import user
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
@@ -79,3 +80,4 @@ def sendTemp(userName, email, subList):
         s.quit()
     except:
         print("Error in Sending Mail")
+
