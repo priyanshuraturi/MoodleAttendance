@@ -89,7 +89,6 @@ def markAttendance():
             else:
                 mailTemp.append(user.user(users[userCount-1]['name'],users[userCount-1]['email'],subjectList))
                 templateFlag =1
-
             driver.delete_all_cookies()
             driver.get('http://45.116.207.67/moodle/login/index.php')
             userCount -= 1
