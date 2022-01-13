@@ -6,7 +6,6 @@ import json
 from mailer import sendMail, sendErrRep,sendEmailTemp
 import user
 
-
 def markAttendance():
     try:
         mailList = []
