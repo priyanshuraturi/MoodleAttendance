@@ -44,7 +44,7 @@ def markAttendance():
                 msg['From'] = "Attendance "
                 msg['To'] = "Priyanshuraturi@gmail.com"
                 mailList.append(msg)
-		userCount-=1
+                userCount -= 1
                 continue
 
             continueLink[0].click()
