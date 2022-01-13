@@ -43,7 +43,7 @@ def markAttendance():
                 msg['Subject'] = 'Moodle Attendance'
                 msg['From'] = "Attendance "
                 msg['To'] = "Priyanshuraturi@gmail.com"
-                mailList.append(msg)
+                #mailList.append(msg)
                 userCount -= 1
                 continue
 
@@ -111,4 +111,4 @@ def markAttendance():
         sendErrRep(e)
 
 
-markAttendance()
+#markAttendance()
