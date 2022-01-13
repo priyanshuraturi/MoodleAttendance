@@ -45,7 +45,8 @@ def markAttendance():
                 msg['From'] = "Attendance "
                 msg['To'] = "Priyanshuraturi@gmail.com"
                 mailList.append(msg)
-                break
+		userCount-=1
+                continue
 
             continueLink[0].click()
             activityList = driver.find_elements_by_link_text('Go to activity')
