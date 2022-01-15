@@ -3,12 +3,14 @@ from selenium import webdriver
 import time
 from datetime import datetime
 import json
-from mailer import sendMail, sendErrRep
-
+from mailer import sendMail, sendErrRep,sendEmailTemp
+import user
 
 def markAttendance():
     try:
         mailList = []
+        mailTemp =[]
+        templateFlag =0
         flag = 0
         logMsg = "Hi \n"
         subjectList = []
@@ -24,7 +26,7 @@ def markAttendance():
         driver = webdriver.Chrome(
             './chromedriver', chrome_options=chrome_options)
         driver.get('http://45.116.207.67/moodle/login/index.php')
-        while(userCount != 0):
+        while userCount != 0:
             print(users[userCount - 1]['name'])
             driver.find_element_by_id('username').send_keys(
                 users[userCount - 1]['id'])
@@ -39,16 +41,18 @@ def markAttendance():
                 msg = EmailMessage()
                 msg.set_content("No Attendance For Today")
                 msg['Subject'] = 'Moodle Attendance'
-                msg['From'] = "Priyanshu Raturi"
+                msg['From'] = "Attendance "
                 msg['To'] = "Priyanshuraturi@gmail.com"
-                mailList.append(msg)
-                break
+                #mailList.append(msg)
+                logout(driver)
+                userCount -= 1
+                continue
 
             continueLink[0].click()
             activityList = driver.find_elements_by_link_text('Go to activity')
             numberOfElems = len(activityList)
             print(numberOfElems)
-            while(numberOfElems > 0):
+            while numberOfElems > 0:
                 time.sleep(1)
                 activityList = driver.find_elements_by_link_text(
                     'Go to activity')
@@ -64,7 +68,7 @@ def markAttendance():
                 time.sleep(1)
                 submitLink = driver.find_elements_by_link_text(
                     'Submit attendance')
-                if(len(submitLink) > 0):
+                if len(submitLink) > 0:
                     submitLink[0].click()
                     heading = driver.find_element_by_xpath(
                         "/html/body/div[2]/div[3]/header/div/div/div/div[1]/div[1]/div/div/h1").text
@@ -84,23 +88,14 @@ def markAttendance():
                 logMsg += users[userCount - 1]['name'] + " \n"
                 flag = 1
             else:
-                message = "Hi,\n " + \
-                    users[userCount - 1]['name'] + \
-                    ",\n Your Subjects Attendace For: \n"
-                for ele in subjectList:
-                    message += ele+"\n"
-                message += "was marked Succesfully ;-)"
-                msg = EmailMessage()
-                msg.set_content(message)
-                msg['Subject'] = 'Moodle Attendance'
-                msg['From'] = "Priyanshu Raturi"
-                msg['To'] = users[userCount - 1]['email']
-                mailList.append(msg)
-                print(msg)
-            driver.delete_all_cookies()
-            driver.get('http://45.116.207.67/moodle/login/index.php')
+                mailTemp.append(user.user(users[userCount-1]['name'],users[userCount-1]['email'],subjectList))
+                templateFlag =1
+            logout(driver)
+            # driver.delete_all_cookies()
+            # driver.get('http://45.116.207.67/moodle/login/index.php')
+            time.sleep(2)
             userCount -= 1
-        if(flag == 1):
+        if flag == 1:
             msg = EmailMessage()
             msg.set_content(
                 logMsg+"Had No Attendance\n Time:"+str(datetime.now()))
@@ -109,12 +104,17 @@ def markAttendance():
             msg['To'] = "Priyanshuraturi@gmail.com"
             flag = 0
             mailList.append(msg)
-
-        sendMail(mailList)
+        if templateFlag == 1:
+            sendEmailTemp(mailTemp)
+        else:
+            sendMail(mailList)
     except Exception as e:
         print(e)
         userCount -= 1
         sendErrRep(e)
 
+def logout(driver):
+    driver.delete_all_cookies()
+    driver.get('http://45.116.207.67/moodle/login/index.php')
 
 markAttendance()
