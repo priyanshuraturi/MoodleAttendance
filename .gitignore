@@ -4,3 +4,4 @@ users.json
 /.idea
 /__pycache__
 /env
+chromedriver
