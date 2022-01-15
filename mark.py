@@ -44,6 +44,7 @@ def markAttendance():
                 msg['From'] = "Attendance "
                 msg['To'] = "Priyanshuraturi@gmail.com"
                 #mailList.append(msg)
+                logout(driver)
                 userCount -= 1
                 continue
 
@@ -89,8 +90,10 @@ def markAttendance():
             else:
                 mailTemp.append(user.user(users[userCount-1]['name'],users[userCount-1]['email'],subjectList))
                 templateFlag =1
-            driver.delete_all_cookies()
-            driver.get('http://45.116.207.67/moodle/login/index.php')
+            logout(driver)
+            # driver.delete_all_cookies()
+            # driver.get('http://45.116.207.67/moodle/login/index.php')
+            time.sleep(2)
             userCount -= 1
         if flag == 1:
             msg = EmailMessage()
@@ -110,5 +113,8 @@ def markAttendance():
         userCount -= 1
         sendErrRep(e)
 
+def logout(driver):
+    driver.delete_all_cookies()
+    driver.get('http://45.116.207.67/moodle/login/index.php')
 
 #markAttendance()
