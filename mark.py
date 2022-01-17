@@ -3,9 +3,11 @@ from selenium import webdriver
 import time
 from datetime import datetime
 import json
+import sys
 from mailer import sendMail, sendErrRep,sendEmailTemp
 import user
 
+sys.stdout.flush()
 def markAttendance():
     try:
         mailList = []
