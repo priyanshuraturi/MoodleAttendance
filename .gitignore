@@ -5,3 +5,4 @@ users.json
 /__pycache__
 /env
 chromedriver
+passReset.py
