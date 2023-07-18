@@ -7,7 +7,7 @@ Python Selenium Project to Mark Attendance on Moodle Platform Regularly
 Clone The Repository , install the requirements , enter your credentials in user.json.
 
 ```bash
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 ## Run
 ```bash
